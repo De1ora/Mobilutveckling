@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Image } from "react-native";
 import { ThemedText } from "./themed-text";
 import { useSettings } from "@/contexts/settings-context";
 import useLocation from "@/hooks/use-location";
@@ -42,9 +42,9 @@ const WeatherScreen = () => {
     };
 
     useEffect(() => {
-        if(location) {
+        if (location) {
             fetchWeather(
-                location.coords.latitude, 
+                location.coords.latitude,
                 location.coords.longitude
             );
         }
@@ -62,12 +62,18 @@ const WeatherScreen = () => {
 
     return (
         <View style={styles.container}>
+            <Image
+                source={{
+                    uri: `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`
+                }}
+                style={styles.weatherIcon}
+            />
             <ThemedText style={styles.location}>{weather.name}</ThemedText>
             <ThemedText style={styles.temp}>
                 {Math.round(weather.main.temp)}{tempSymbol}</ThemedText>
-                <ThemedText style={styles.description}>
-                    {weather.weather[0].description}
-                </ThemedText>
+            <ThemedText style={styles.description}>
+                {weather.weather[0].description}
+            </ThemedText>
         </View>
     );
 };
@@ -77,6 +83,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        paddingBottom: 120,
+    },
+    weatherIcon: {
+        width: 200,
+        height: 200,
     },
     location: {
         fontSize: 32,
@@ -90,6 +101,7 @@ const styles = StyleSheet.create({
     description: {
         fontSize: 26,
         lineHeight: 40,
+        paddingTop: 10,
         textTransform: 'capitalize',
     },
 })
