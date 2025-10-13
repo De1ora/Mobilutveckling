@@ -19,12 +19,18 @@ type Weather = {
         sea_level: number;
         grnd_level: number;
     };
+    weather: Array<{
+        id: number;
+        main: string;
+        description: string;
+        icon: string;
+    }>;
 };
 
 const WeatherScreen = () => {
     const [weather, setWeather] = useState<Weather>();
     const { units } = useSettings();
-    const { location, errorMsg } = useLocation();
+    const { location } = useLocation();
 
     const fetchWeather = async (lat: number, lon: number) => {
         const results = await fetch(
@@ -59,6 +65,9 @@ const WeatherScreen = () => {
             <ThemedText style={styles.location}>{weather.name}</ThemedText>
             <ThemedText style={styles.temp}>
                 {Math.round(weather.main.temp)}{tempSymbol}</ThemedText>
+                <ThemedText style={styles.description}>
+                    {weather.weather[0].description}
+                </ThemedText>
         </View>
     );
 };
@@ -76,6 +85,12 @@ const styles = StyleSheet.create({
     temp: {
         fontSize: 80,
         lineHeight: 88,
+        fontWeight: 'bold',
+    },
+    description: {
+        fontSize: 26,
+        lineHeight: 40,
+        textTransform: 'capitalize',
     },
 })
 
