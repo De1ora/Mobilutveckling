@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { ThemedText } from "./themed-text";
 import { useSettings } from "@/contexts/settings-context";
+import useLocation from "@/hooks/use-location";
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const OPEN_WEATHER_KEY = process.env.EXPO_PUBLIC_OPEN_WEATHER_KEY;
@@ -23,10 +24,9 @@ type Weather = {
 const WeatherScreen = () => {
     const [weather, setWeather] = useState<Weather>();
     const { units } = useSettings();
+    const { location, errorMsg } = useLocation();
 
-    const fetchWeather = async () => {
-        const lat = 28.4636;
-        const lon = -16.2518;
+    const fetchWeather = async (lat: number, lon: number) => {
         const results = await fetch(
             `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${units}`
         );
@@ -36,13 +36,22 @@ const WeatherScreen = () => {
     };
 
     useEffect(() => {
-        fetchWeather();
-    }, [units]);
+        if(location) {
+            fetchWeather(
+                location.coords.latitude, 
+                location.coords.longitude
+            );
+        }
+    }, [location, units]);
 
     const tempSymbol = units === 'metric' ? '°C' : '°F';
 
-    if (!weather) {
-        return <ActivityIndicator />;
+    if (!location || !weather) {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator />
+            </View>
+        );
     }
 
     return (
