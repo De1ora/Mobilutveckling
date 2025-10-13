@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from './themed-text';
+import { useSettings } from '@/contexts/settings-context';
 
 const TemperatureToggle = () => {
-  const [unit, setUnit] = useState('celsius');
+  const {units, setUnits} = useSettings();
 
   return (
     <View style={styles.container}>
@@ -14,20 +15,20 @@ const TemperatureToggle = () => {
           style={[
             styles.toggleButton,
             styles.leftButton,
-            unit === 'fahrenheit' && styles.activeButton
+            units === 'imperial' && styles.activeButton
           ]}
-          onPress={() => setUnit('fahrenheit')}
+          onPress={() => setUnits('imperial')}
           activeOpacity={0.8}
         >
           <ThemedText style={[
             styles.toggleText,
-            unit === 'fahrenheit' && styles.activeText
+            units === 'imperial' && styles.activeText
           ]}>
             Fahrenheit
           </ThemedText>
           <ThemedText style={[
             styles.unitSymbol,
-            unit === 'fahrenheit' && styles.activeText
+            units === 'imperial' && styles.activeText
           ]}>
             °F
           </ThemedText>
@@ -37,20 +38,20 @@ const TemperatureToggle = () => {
           style={[
             styles.toggleButton,
             styles.rightButton,
-            unit === 'celsius' && styles.activeButton
+            units === 'metric' && styles.activeButton
           ]}
-          onPress={() => setUnit('celsius')}
+          onPress={() => setUnits('metric')}
           activeOpacity={0.8}
         >
           <ThemedText style={[
             styles.toggleText,
-            unit === 'celsius' && styles.activeText
+            units === 'metric' && styles.activeText
           ]}>
             Celsius
           </ThemedText>
           <ThemedText style={[
             styles.unitSymbol,
-            unit === 'celsius' && styles.activeText
+            units === 'metric' && styles.activeText
           ]}>
             °C
           </ThemedText>
@@ -58,7 +59,7 @@ const TemperatureToggle = () => {
       </View>
 
       <ThemedText style={styles.resultText}>
-        Temperature will be displayed in {unit === 'celsius' ? 'Celsius (°C)' : 'Fahrenheit (°F)'}
+        Temperature will be displayed in {units === 'metric' ? 'Celsius (°C)' : 'Fahrenheit (°F)'}
       </ThemedText>
     </View>
   );

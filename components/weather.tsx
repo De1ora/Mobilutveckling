@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { ThemedText } from "./themed-text";
+import { useSettings } from "@/contexts/settings-context";
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const OPEN_WEATHER_KEY = process.env.EXPO_PUBLIC_OPEN_WEATHER_KEY;
@@ -21,12 +22,13 @@ type Weather = {
 
 const WeatherScreen = () => {
     const [weather, setWeather] = useState<Weather>();
+    const { units } = useSettings();
 
     const fetchWeather = async () => {
         const lat = 28.4636;
         const lon = -16.2518;
         const results = await fetch(
-            `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=metric`
+            `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_KEY}&units=${units}`
         );
         const data = await results.json();
         console.log(JSON.stringify(data, null, 2));
@@ -35,7 +37,9 @@ const WeatherScreen = () => {
 
     useEffect(() => {
         fetchWeather();
-    }, []);
+    }, [units]);
+
+    const tempSymbol = units === 'metric' ? '°C' : '°F';
 
     if (!weather) {
         return <ActivityIndicator />;
@@ -44,7 +48,8 @@ const WeatherScreen = () => {
     return (
         <View style={styles.container}>
             <ThemedText style={styles.location}>{weather.name}</ThemedText>
-            <ThemedText style={styles.temp}>{Math.round(weather.main.temp)}°</ThemedText>
+            <ThemedText style={styles.temp}>
+                {Math.round(weather.main.temp)}{tempSymbol}</ThemedText>
         </View>
     );
 };
