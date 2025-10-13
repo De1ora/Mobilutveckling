@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
+import { requestLocationPermission } from "@/utils/permission";
 
 export default function useLocation() {
   const [location, setLocation] = useState<Location.LocationObject>();
@@ -7,9 +8,9 @@ export default function useLocation() {
 
   useEffect(() => {
     (async () => {
+      const hasPermission = await requestLocationPermission();
 
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
+      if (!hasPermission) {
         setErrorMsg("Permission to access location was denied");
         return;
       }
