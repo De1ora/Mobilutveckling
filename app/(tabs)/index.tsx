@@ -4,9 +4,11 @@ import SearchBar from '@/components/search-bar';
 import SearchResults from '@/components/search-results';
 import WeatherScreen from '@/components/weather';
 import { useCitySearch } from '@/hooks/use-search-city';
+import useLocation from '@/hooks/use-location';
 
 export default function HomeScreen() {
   const [selectedCity, setSelectedCity] = useState(null);
+  const { location } = useLocation();
 
   const {
     searchText,
@@ -20,11 +22,20 @@ export default function HomeScreen() {
     clearSearch();
   };
 
+  const handleUseCurrentLocation = () => {
+    setSelectedCity(null);
+    clearSearch();
+  };
+
+  const showCurrentLocationOption = searchText.length > 0;
+
   return (
     <View style={styles.container}>
       <SearchBar
         value={searchText}
         onChangeText={handleSearchTextChange}
+        onUseCurrentLocation={handleUseCurrentLocation}
+        showCurrentLocationOption={showCurrentLocationOption}
       />
       <SearchResults
         results={searchResults}
