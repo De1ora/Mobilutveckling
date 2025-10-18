@@ -12,7 +12,7 @@ export default function SettingsScreen() {
           <ThemedText
             type="title"
             style={[styles.title, {
-              fontFamily: Fonts.rounded, // Ändra till något custom?
+              fontFamily: Fonts.rounded,
             }]}>
             Settings
           </ThemedText>
