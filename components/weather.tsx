@@ -27,7 +27,19 @@ type Weather = {
     }>;
 };
 
-const WeatherScreen = () => {
+type City = {
+    coord: {
+        lat: number;
+        lon: number;
+    };
+    name: string;
+};
+
+type WeatherScreenProps = {
+    selectedCity?: City | null;
+};
+
+const WeatherScreen = ({ selectedCity }: WeatherScreenProps) => {
     const [weather, setWeather] = useState<Weather>();
     const { units } = useSettings();
     const { location } = useLocation();
@@ -42,17 +54,22 @@ const WeatherScreen = () => {
     };
 
     useEffect(() => {
-        if (location) {
+        if (selectedCity) {
             fetchWeather(
-                location.coords.latitude,
-                location.coords.longitude
+                selectedCity.coord.lat,
+                selectedCity.coord.lon
             );
-        }
-    }, [location, units]);
+        } else if (location) {
+                fetchWeather(
+                    location.coords.latitude,
+                    location.coords.longitude
+                );
+            }
+        }, [location, units, selectedCity]);
 
     const tempSymbol = units === 'metric' ? '°C' : '°F';
 
-    if (!location || !weather) {
+    if (!weather) {
         return (
             <View style={styles.container}>
                 <ActivityIndicator />

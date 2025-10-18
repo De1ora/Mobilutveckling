@@ -3,7 +3,12 @@ import Feather from '@expo/vector-icons/Feather';
 import { Colors } from '@/constants/theme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const SearchBar = () => {
+type SearchBarProps = {
+    value: string;
+    onChangeText: (text: string) => void;
+};
+
+const SearchBar = ({ value, onChangeText } : SearchBarProps) => {
     const colorScheme = useColorScheme();
     const colors = Colors[colorScheme ?? 'light'];
 
@@ -16,6 +21,8 @@ const SearchBar = () => {
                 style={[styles.input, { color: colors.text }]}
                 placeholder="Search a city ..."
                 placeholderTextColor="#9b9b9bff"
+                value={value}
+                onChangeText={onChangeText}
             />
         </SafeAreaView>
     );
