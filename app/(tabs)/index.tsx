@@ -9,6 +9,7 @@ import useLocation from '@/hooks/use-location';
 export default function HomeScreen() {
   const [selectedCity, setSelectedCity] = useState(null);
   const { location } = useLocation();
+  const [isFocused, setIsFocused] = useState(false);
 
   const {
     searchText,
@@ -27,7 +28,7 @@ export default function HomeScreen() {
     clearSearch();
   };
 
-  const showCurrentLocationOption = searchText.length > 0;
+  const showCurrentLocationOption = isFocused || searchText.length > 0;
 
   return (
     <View style={styles.container}>
@@ -36,6 +37,8 @@ export default function HomeScreen() {
         onChangeText={handleSearchTextChange}
         onUseCurrentLocation={handleUseCurrentLocation}
         showCurrentLocationOption={showCurrentLocationOption}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
       <SearchResults
         results={searchResults}

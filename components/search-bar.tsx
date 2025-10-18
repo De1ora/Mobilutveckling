@@ -1,4 +1,3 @@
-// components/search-bar.tsx
 import { TextInput, StyleSheet, Pressable, useColorScheme, View } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import { Colors } from '@/constants/theme';
@@ -11,13 +10,17 @@ type SearchBarProps = {
     onChangeText: (text: string) => void;
     onUseCurrentLocation: () => void;
     showCurrentLocationOption: boolean;
+    onFocus: () => void;
+    onBlur: () => void;
 };
 
 const SearchBar = ({
     value,
     onChangeText,
     onUseCurrentLocation,
-    showCurrentLocationOption
+    showCurrentLocationOption,
+    onFocus,
+    onBlur,
 }: SearchBarProps) => {
     const colorScheme = useColorScheme();
     const colors = Colors[colorScheme ?? 'light'];
@@ -34,6 +37,8 @@ const SearchBar = ({
                     placeholderTextColor="#9b9b9bff"
                     value={value}
                     onChangeText={onChangeText}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                 />
                 {value.length > 0 && (
                     <Pressable
