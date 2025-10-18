@@ -10,14 +10,16 @@ export const useCitySearch = () => {
     const { units } = useSettings();
 
     const searchCity = async (text: string) => {
-        if (text.length <= 1) {
+        const trimmedText = text.trim();
+
+        if (trimmedText.length <= 1) {
             setSearchResults([]);
             return;
         }
         
         setIsSearching(true);
         try {
-            const searchData = await getCityBySearch(text, units);
+            const searchData = await getCityBySearch(trimmedText, units);
             if (searchData?.list) {
                 setSearchResults(searchData.list);
             }
