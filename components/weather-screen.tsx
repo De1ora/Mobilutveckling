@@ -36,7 +36,7 @@ type Weather = {
     }>;
 };
 
-type City = {
+export type City = {
     coord: {
         lat: number;
         lon: number;
