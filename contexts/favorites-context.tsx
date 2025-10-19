@@ -70,7 +70,6 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
         } catch (error) {
             console.error('Error saving favorites to AsyncStorage:', error);
-            // Show toast?
         }
     };
 
@@ -88,7 +87,6 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             };
 
             setFavorites(prev => [...prev, newFavorite]);
-            // Show toast?
         } catch (error) {
             console.error('Error adding favorite:', error);
             throw error;
@@ -98,7 +96,6 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     const removeFavorite = async (cityId: string) => {
         try {
             setFavorites(prev => prev.filter(fav => fav.id !== cityId));
-            // Show toast
         } catch (error) {
             console.error('Error removing favorite:', error);
             throw error;
@@ -135,9 +132,9 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useFavorites = () => {
-  const context = useContext(FavoritesContext);
-  if (context === undefined) {
-    throw new Error('useFavorites must be used within a FavoritesProvider');
-  }
-  return context;
+    const context = useContext(FavoritesContext);
+    if (context === undefined) {
+        throw new Error('useFavorites must be used within a FavoritesProvider');
+    }
+    return context;
 };

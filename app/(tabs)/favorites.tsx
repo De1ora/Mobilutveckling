@@ -13,7 +13,7 @@ export default function FavoritesScreen() {
     // Navigate to home screen and pass the selected city
     router.push({
       pathname: '/',
-      params: { 
+      params: {
         cityId: favorite.id,
         cityName: favorite.name,
         lat: favorite.coord.lat,
@@ -26,18 +26,18 @@ export default function FavoritesScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
 
-        <View style={styles.header}>
-          <ThemedText
-            type="title"
-            style={[styles.title, {
-              fontFamily: Fonts.rounded, 
-            }]}>
-            Favorites
-          </ThemedText>
-        </View>
+      <View style={styles.header}>
+        <ThemedText
+          type="title"
+          style={[styles.title, {
+            fontFamily: Fonts.rounded,
+          }]}>
+          Favorites
+        </ThemedText>
+      </View>
 
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          {isLoading ? (
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {isLoading ? (
           <View style={styles.emptyContainer}>
             <ThemedText style={styles.emptyText}>Loading favorites...</ThemedText>
           </View>

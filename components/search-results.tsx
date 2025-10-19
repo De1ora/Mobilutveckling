@@ -30,7 +30,7 @@ const SearchResults = ({ results, onSelectCity }: SearchResultsProps) => {
             keyExtractor={(item) => item.id.toString()}
             style={styles.container}
             renderItem={({ item }) => (
-                <Pressable 
+                <Pressable
                     style={styles.resultItem}
                     onPress={() => onSelectCity(item)}
                 >

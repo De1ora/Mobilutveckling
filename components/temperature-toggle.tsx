@@ -4,12 +4,12 @@ import { ThemedText } from './themed-text';
 import { useSettings } from '@/contexts/settings-context';
 
 const TemperatureToggle = () => {
-  const {units, setUnits} = useSettings();
+  const { units, setUnits } = useSettings();
 
   return (
     <View style={styles.container}>
       <ThemedText style={styles.label}>Choose your temperature unit:</ThemedText>
-      
+
       <View style={styles.toggleContainer}>
         <TouchableOpacity
           style={[

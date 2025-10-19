@@ -4,7 +4,6 @@
 // The cards are clickable, and when clicked they navigate to the WeatherScreen for that city!
 // FavoritesScreen is Scrollable!
 
-// components/favorite-card.tsx
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Pressable, ActivityIndicator, useColorScheme } from 'react-native';
 import FavoritesButton from './favorites-button';
@@ -50,20 +49,20 @@ const FavoriteCard = ({ favorite, onPress }: FavoriteCardProps) => {
   const tempSymbol = units === 'metric' ? '°C' : '°F';
 
   return (
-    <Pressable 
-      style={[styles.card, { backgroundColor: 'white' }]} 
+    <Pressable
+      style={[styles.card, { backgroundColor: 'white' }]}
       onPress={onPress}
       android_ripple={{ color: 'white' }}
     >
       {/* Heart Button - Left Side */}
       <View style={styles.heartContainer}>
-        <FavoritesButton 
+        <FavoritesButton
           city={{
             id: favorite.id,
             name: favorite.name,
             country: favorite.country,
             coord: favorite.coord,
-          }} 
+          }}
           size={28}
         />
       </View>

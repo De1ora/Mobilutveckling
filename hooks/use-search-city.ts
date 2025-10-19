@@ -16,7 +16,7 @@ export const useCitySearch = () => {
             setSearchResults([]);
             return;
         }
-        
+
         setIsSearching(true);
         try {
             const searchData = await getCityBySearch(trimmedText, units);

@@ -7,12 +7,12 @@ import { useToast } from '@/contexts/toast-context';
 // Visas i WeatherScreen
 
 type CityData = {
-    id: number | string; 
+    id: number | string;
     name: string;
-    sys?: {              
+    sys?: {
         country: string;
     };
-    country?: string;    
+    country?: string;
     coord: {
         lat: number;
         lon: number;
@@ -21,14 +21,14 @@ type CityData = {
 
 type FavoritesButtonProps = {
     city: CityData | null;
-    size?: number; 
-    color?: string;       
+    size?: number;
+    color?: string;
 };
 
-const FavoritesButton = ({ 
-    city, 
-    size = 40, 
-    color = 'hotpink' 
+const FavoritesButton = ({
+    city,
+    size = 40,
+    color = 'hotpink'
 }: FavoritesButtonProps) => {
     const { toggleFavorite, isFavorite } = useFavorites();
     const { showToast } = useToast();
@@ -53,8 +53,8 @@ const FavoritesButton = ({
             await toggleFavorite(favoriteCity);
 
             showToast(
-                favorited 
-                    ? `${city.name} removed from favorites` 
+                favorited
+                    ? `${city.name} removed from favorites`
                     : `${city.name} added to favorites`,
                 'success'
             );
