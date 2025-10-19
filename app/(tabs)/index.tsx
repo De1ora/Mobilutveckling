@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import SearchBar from '@/components/search-bar';
 import SearchResults from '@/components/search-results';
-import WeatherScreen from '@/components/weather';
+import WeatherScreen from '@/components/weather-screen';
 import { useCitySearch } from '@/hooks/use-search-city';
 import useLocation from '@/hooks/use-location';
 
