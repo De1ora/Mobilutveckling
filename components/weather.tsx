@@ -3,12 +3,21 @@ import { ActivityIndicator, StyleSheet, View, Image } from "react-native";
 import { ThemedText } from "./themed-text";
 import { useSettings } from "@/contexts/settings-context";
 import useLocation from "@/hooks/use-location";
+import FavoritesButton from "./favorites-button";
 
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const OPEN_WEATHER_KEY = process.env.EXPO_PUBLIC_OPEN_WEATHER_KEY;
 
 type Weather = {
+    id: number;
     name: string;
+    coord: {
+        lat: number;
+        lon: number;
+    };
+    sys: {
+        country: string;
+    };
     main: {
         temp: number;
         feels_like: number;
@@ -60,12 +69,12 @@ const WeatherScreen = ({ selectedCity }: WeatherScreenProps) => {
                 selectedCity.coord.lon
             );
         } else if (location) {
-                fetchWeather(
-                    location.coords.latitude,
-                    location.coords.longitude
-                );
-            }
-        }, [location, units, selectedCity]);
+            fetchWeather(
+                location.coords.latitude,
+                location.coords.longitude
+            );
+        }
+    }, [location, units, selectedCity]);
 
     const tempSymbol = units === 'metric' ? '°C' : '°F';
 
@@ -79,6 +88,9 @@ const WeatherScreen = ({ selectedCity }: WeatherScreenProps) => {
 
     return (
         <View style={styles.container}>
+            <View style={styles.heartButton}>
+                <FavoritesButton city={weather} />
+            </View>
             <Image
                 source={{
                     uri: `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`
@@ -101,6 +113,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingBottom: 120,
+    },
+    heartButton: {
+        alignSelf: 'flex-end',
+        marginRight: 20,
+        marginTop: 0,
+        paddingRight: 10,
     },
     weatherIcon: {
         width: 200,

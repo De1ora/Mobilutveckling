@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         paddingHorizontal: 12,
         paddingVertical: 8,
+        marginBottom: 0,
     },
     iconButton: {
         marginRight: 8,
