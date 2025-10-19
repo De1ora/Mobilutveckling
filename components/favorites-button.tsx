@@ -2,6 +2,7 @@ import { FavoriteCity, useFavorites } from '@/contexts/favorites-context';
 import React from 'react';
 import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { IconSymbol } from './ui/icon-symbol';
+import { useToast } from '@/contexts/toast-context';
 // Uppe i högra hörnet, under sökfältet! Använder heart symbolen (som är outlined), och heart.fill när staden favoritmarkerats!
 // Visas i WeatherScreen
 
@@ -30,6 +31,7 @@ const FavoritesButton = ({
     color = 'hotpink' 
 }: FavoritesButtonProps) => {
     const { toggleFavorite, isFavorite } = useFavorites();
+    const { showToast } = useToast();
 
     if (!city) {
         return null;
@@ -50,12 +52,16 @@ const FavoritesButton = ({
 
             await toggleFavorite(favoriteCity);
 
-            // Show toast here
-            // showToast(favorited ? 'Removed from favorites' : 'Added to favorites');
+            showToast(
+                favorited 
+                    ? `${city.name} removed from favorites` 
+                    : `${city.name} added to favorites`,
+                'success'
+            );
 
         } catch (error) {
             console.error('Error toggling favorite:', error);
-            Alert.alert('Error', 'Failed to update favorites');
+            showToast('Failed to update favorites ', 'error');
         }
     };
 
