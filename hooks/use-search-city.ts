@@ -22,6 +22,8 @@ export const useCitySearch = () => {
             const searchData = await getCityBySearch(trimmedText, units);
             if (searchData?.list) {
                 setSearchResults(searchData.list);
+            } else {
+                setSearchResults([]);
             }
         } catch (error) {
             console.error('Search error:', error);
