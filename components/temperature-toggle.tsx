@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from './themed-text';
 import { useSettings } from '@/contexts/settings-context';
 
-const TemperatureToggle = () => {
+const TemperatureToggleButton = () => {
   const { units, setUnits } = useSettings();
 
   return (
@@ -13,7 +13,7 @@ const TemperatureToggle = () => {
       <View style={styles.toggleContainer}>
         <TouchableOpacity
           style={[
-            styles.toggleButton,
+            styles.temperatureToggleButton,
             styles.leftButton,
             units === 'imperial' && styles.activeButton
           ]}
@@ -36,7 +36,7 @@ const TemperatureToggle = () => {
 
         <TouchableOpacity
           style={[
-            styles.toggleButton,
+            styles.temperatureToggleButton,
             styles.rightButton,
             units === 'metric' && styles.activeButton
           ]}
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginBottom: 10,
   },
-  toggleButton: {
+  temperatureToggleButton: {
     paddingVertical: 20,
     paddingHorizontal: 30,
     justifyContent: 'center',
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TemperatureToggle;
+export default TemperatureToggleButton;

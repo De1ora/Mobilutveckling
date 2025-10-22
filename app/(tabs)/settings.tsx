@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/themed-text';
 import { Fonts } from '@/constants/theme';
-import ToggleButton from '@/components/temperature-toggle';
+import TemperatureToggleButton from '@/components/temperature-toggle';
 
 export default function SettingsScreen() {
   return (
@@ -18,7 +18,7 @@ export default function SettingsScreen() {
           </ThemedText>
         </View>
         <View>
-          <ToggleButton />
+          <TemperatureToggleButton />
         </View>
       </ScrollView>
     </SafeAreaView>
