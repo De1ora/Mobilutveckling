@@ -1,14 +1,3 @@
-// Load favorites from Async Storage on app start
-// provide methods: addFavorite, removeFavorite, isFavorite
-// expose list of favorites
-// save to Async Storage whenever favorites change
-
-// Only store location info! fetch fresh weather when viewing favorites!! 
-
-// Async Storage: Async Storage operates on a simple key-value pair storage system, similar to 
-// JavaScript's localStorage but with added capabilities for mobile environments. Each piece of 
-// data is linked to a unique key, a string used as an identifier to store, retrieve, or delete the data.
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

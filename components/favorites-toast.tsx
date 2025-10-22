@@ -1,6 +1,3 @@
-// A toast that pops up when a city is added to favorites and removed!
-// Pops up!
-
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Animated, Text, View, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

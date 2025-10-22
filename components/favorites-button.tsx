@@ -3,8 +3,6 @@ import React from 'react';
 import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { IconSymbol } from './ui/icon-symbol';
 import { useToast } from '@/contexts/toast-context';
-// Uppe i högra hörnet, under sökfältet! Använder heart symbolen (som är outlined), och heart.fill när staden favoritmarkerats!
-// Visas i WeatherScreen
 
 type CityData = {
     id: number | string;
