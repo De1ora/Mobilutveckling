@@ -4,12 +4,10 @@ import SearchBar from '@/components/search-bar';
 import SearchResults from '@/components/search-results';
 import WeatherScreen, { City } from '@/components/weather-screen';
 import { useCitySearch } from '@/hooks/use-search-city';
-import useLocation from '@/hooks/use-location';
 import { useLocalSearchParams } from 'expo-router';
 
 export default function HomeScreen() {
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const { location } = useLocation();
   const [isFocused, setIsFocused] = useState(false);
 
   const params = useLocalSearchParams();
