@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 const STORAGE_KEY = '@weather_app_favorites';
 
@@ -23,7 +23,7 @@ type FavoritesContextType = {
     isLoading: boolean;
 };
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined); // Jobba här
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     const [favorites, setFavorites] = useState<FavoriteCity[]>([]);
@@ -47,7 +47,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
                 setFavorites(loadedFavorites);
             }
         } catch (error) {
-            console.error('Error loading favorites from AsyncStorage:', error);
+            console.error('Error loading favorites from AsyncStorage:', error); // Kastar inte iväg! Ändra?
         } finally {
             setIsLoading(false);
         }
@@ -58,7 +58,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             const jsonValue = JSON.stringify(favorites);
             await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
         } catch (error) {
-            console.error('Error saving favorites to AsyncStorage:', error);
+            console.error('Error saving favorites to AsyncStorage:', error); // Kastar inte iväg! Ändra?
         }
     };
 
@@ -78,7 +78,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             setFavorites(prev => [...prev, newFavorite]);
         } catch (error) {
             console.error('Error adding favorite:', error);
-            throw error;
+            throw error; // Kastar iväg fel
         }
     };
 
@@ -87,7 +87,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             setFavorites(prev => prev.filter(fav => fav.id !== cityId));
         } catch (error) {
             console.error('Error removing favorite:', error);
-            throw error;
+            throw error; // Kastar iväg fel
         }
     };
 
